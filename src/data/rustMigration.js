@@ -16,18 +16,18 @@ export const MIGRATION_STATUSES = {
   default: {
     label: 'Rust default',
     description: 'Rust handles this support unit by default with a Python fallback.',
+    migrated: true,
   },
   rustOnly: {
     label: 'Rust only',
     description: 'This support unit requires the Rust implementation.',
+    migrated: true,
   },
 };
 
 export const MAIN_MIGRATION_VERSION = releaseSnapshot.main.version;
 
 export const MIGRATION_RELEASES = [...releaseSnapshot.published, releaseSnapshot.main];
-
-export const MIGRATION_VERSIONS = MIGRATION_RELEASES.map(release => release.version);
 
 export const MIGRATION_MILESTONES = [
   {

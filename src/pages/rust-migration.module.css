@@ -74,13 +74,6 @@
   letter-spacing: -0.02em;
 }
 
-.sectionHeading p:not(.kicker) {
-  max-width: 680px;
-  margin: 0;
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.9rem;
-}
-
 .kicker {
   margin: 0 0 0.45rem;
   color: var(--ifm-color-primary);
@@ -90,7 +83,8 @@
   text-transform: uppercase;
 }
 
-.viewToggle {
+.viewToggle,
+.milestoneSelector {
   display: inline-flex;
   flex: 0 0 auto;
   gap: 2px;
@@ -100,14 +94,30 @@
   background: var(--ifm-color-emphasis-100);
 }
 
-.viewToggle button {
-  padding: 0.4rem 0.8rem;
+.viewToggle button,
+.milestoneSelector button {
   border: 0;
   border-radius: 5px;
   background: transparent;
   color: var(--ifm-color-emphasis-600);
   cursor: pointer;
   font: inherit;
+}
+
+.viewToggle button:focus-visible,
+.milestoneSelector button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.viewToggle .activeToggle,
+.milestoneSelector .activeMilestone {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+  color: var(--ifm-font-color-base);
+}
+
+.viewToggle button {
+  padding: 0.4rem 0.8rem;
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -116,15 +126,8 @@
   color: var(--ifm-font-color-base);
 }
 
-.viewToggle button:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
-  outline-offset: 2px;
-}
-
 .viewToggle .activeToggle {
   background: var(--ifm-background-surface-color);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
-  color: var(--ifm-font-color-base);
 }
 
 .trackerBody {
@@ -188,8 +191,6 @@
 
 .progressSummary {
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
   min-width: 0;
 }
 
@@ -202,27 +203,11 @@
   line-height: 1;
 }
 
-.milestoneSelector {
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 8px;
-  background: var(--ifm-color-emphasis-100);
-}
-
 .milestoneSelector button {
   display: flex;
   align-items: baseline;
   gap: 0.4rem;
   padding: 0.35rem 0.7rem;
-  border: 0;
-  border-radius: 5px;
-  background: transparent;
-  color: var(--ifm-color-emphasis-600);
-  cursor: pointer;
-  font: inherit;
   white-space: nowrap;
 }
 
@@ -241,15 +226,8 @@
   opacity: 0.5;
 }
 
-.milestoneSelector button:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
-  outline-offset: 2px;
-}
-
 .milestoneSelector .activeMilestone {
   background: var(--ifm-background-color);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
-  color: var(--ifm-font-color-base);
 }
 
 .chartBody {
@@ -380,44 +358,27 @@
   background: var(--status-color);
 }
 
-.python,
-.cell_python {
+.python {
   --status-color: var(--status-0);
 }
 
-.building,
-.cell_building {
+.building {
   --status-color: var(--status-1);
-}
-
-.preview,
-.cell_preview {
-  --status-color: var(--status-2);
-}
-
-.default,
-.cell_default {
-  --status-color: var(--status-3);
-}
-
-.rustOnly,
-.cell_rustOnly {
-  --status-color: var(--status-4);
-}
-
-.cell_building {
   --status-fill: 8%;
 }
 
-.cell_preview {
+.preview {
+  --status-color: var(--status-2);
   --status-fill: 14%;
 }
 
-.cell_default {
+.default {
+  --status-color: var(--status-3);
   --status-fill: 22%;
 }
 
-.cell_rustOnly {
+.rustOnly {
+  --status-color: var(--status-4);
   --status-fill: 32%;
 }
 
@@ -542,11 +503,6 @@
     padding: 1rem 1rem 0;
   }
 
-  .progressSummary {
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
   .milestoneSelector {
     max-width: 100%;
   }
@@ -590,7 +546,6 @@
 }
 
 [data-theme='dark'] .page {
-  --status-0: var(--ifm-color-emphasis-300);
   --status-1: #1f4d38;
   --status-2: #2f7a55;
   --status-3: #3fae76;
